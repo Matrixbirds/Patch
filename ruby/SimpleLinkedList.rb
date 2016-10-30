@@ -13,4 +13,17 @@ head = ListNode.new(nil)
   cur = cur.next
 end
 
-puts head.inspect
+require 'ostruct'
+linkedList = OpenStruct.new ptr: nil, head: nil
+[1,2,3,4]
+  .map { |e| ListNode.new e }
+  .reduce(linkedList) do |list, cur|
+    if list.ptr
+      list.ptr.next = cur
+      list.ptr = list.ptr.next
+    else
+      list.head = list.ptr = cur
+    end
+    puts "#{list.inspect}"
+    list
+end
